@@ -1,5 +1,5 @@
 import fs from 'fs'
-import ProductManager from '../components/ProductManager.js'
+import ProductManager from './ProductManager.js'
 //lo importo para poder ver lo que los carritos incluyan
 
 const products = new ProductManager()
