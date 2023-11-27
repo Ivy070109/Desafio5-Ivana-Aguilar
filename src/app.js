@@ -1,10 +1,11 @@
 import express from "express"
+import mongoose from "mongoose"
 import productRouter from "./routes/product.router.js"
 import cartsRouter from "./routes/carts.router.js"
 import handlebars from "express-handlebars"
 import viewsRouter from './routes/views.router.js'
 //import ProductManager from "./components/ProductManager.js"
-import { Server } from "socket.io"
+//import { Server } from "socket.io"
 import { __dirname } from "./utils.js"
 
 const app = express()
@@ -12,18 +13,20 @@ const PORT = 8080
 //const productManager = new ProductManager("/files/products.json")
 const MONGOOSE_URL = 'mongodb://127.0.0.1:27017/ecommerce'
 
-const httpServer = app.listen(PORT, ()=> {
-    console.log(`Servidor Express ejecutándose en puerto ${PORT}`)
-})
+// const httpServer = app.listen(PORT, () => {
+//     console.log(`Servidor Express ejecutándose en puerto ${PORT}`)
+// })
 
 try {
-    await MONGOOSE_URL.connect(MONGOOSE_URL)
-    httpServer
+    await mongoose.connect(MONGOOSE_URL)
+    app.listen(PORT, () => {
+        console.log(`Servidor Express ejecutándose en puerto ${PORT}`)
+    })
 } catch (err) {
     console.log(`No se puede conectar con las bases de datos (${err.message})`)
 }
 
-const socketServer = new Server(httpServer)
+//const socketServer = new Server(httpServer)
 
 //middleware a nivel app, capta errores
 app.use((err, req, res, next) => {
@@ -45,20 +48,20 @@ app.use('/', viewsRouter)
 //app.use(express.static('./src/public'))
 app.use('/static', express.static(`${__dirname}/public`))
 
-socketServer.on('connection', async (socket) => {
-    console.log('Cliente conectado con id:', socket.id)
-    const productsArray = await productManager.getProducts({})
-    socketServer.emit('enviarproducts', productsArray)
+// socketServer.on('connection', async (socket) => {
+//     console.log('Cliente conectado con id:', socket.id)
+//     const productsArray = await productManager.getProducts({})
+//     socketServer.emit('enviarproducts', productsArray)
 
-    socket.on('addProduct', async (obj) => {
-        await productManager.addProduct(obj)
-        const updatedProducts = await productManager.getProducts({})
-    socketServer.emit('productsupdated', updatedProducts)
-    })
+//     socket.on('addProduct', async (obj) => {
+//         await productManager.addProduct(obj)
+//         const updatedProducts = await productManager.getProducts({})
+//     socketServer.emit('productsupdated', updatedProducts)
+//     })
 
-    socket.on('deleteProduct', async (id) => {
-        await productManager.deleteProductById(id)
-        const newProductList = await productManager.getProducts({})
-    socketServer.emit('productsupdated', newProductList)
-    })
-})
+//     socket.on('deleteProduct', async (id) => {
+//         await productManager.deleteProductById(id)
+//         const newProductList = await productManager.getProducts({})
+//     socketServer.emit('productsupdated', newProductList)
+//     })
+// })
