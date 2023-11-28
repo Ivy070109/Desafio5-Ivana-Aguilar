@@ -52,7 +52,7 @@ router.post("/", uploader.single('thumbnail'), async (req, res) => {
 })
 
 router.put("/:pid", async (req, res) => {
-  const { pid } = req.params
+  const pid = req.params.pid
   const objModif = req.body
   const productUpdated = await product.updateProduct(pid, objModif)
 

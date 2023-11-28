@@ -1,11 +1,13 @@
 import { Router } from "express"
-import CartManager from "../dao/fileSystem/CartManager.js"
+import CartManager from "../dao/database/CartManager.js"
 
 const carts = new CartManager()
 const cartsRouter = Router()
 
 cartsRouter.post('/', async (req, res) => {
-    return res.status(200).send(await carts.addCarts())
+    const newCart = await carts.addCarts()
+
+    return res.status(200).send({ status: 'OK'})
 })
 
 cartsRouter.get('/', async (req, res) => {

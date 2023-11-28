@@ -78,7 +78,7 @@ class ProductManager {
     //Actualizar productos según su id
     updateProduct = async (pid, objModif) => {
         try {
-            return productModel.findByIdAndUpdate(pid,  { $set: objModif })
+            return productModel.findByIdAndUpdate(pid, objModif)
         } catch (error) {
             return console.error(error)
         }
