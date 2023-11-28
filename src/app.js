@@ -11,7 +11,7 @@ import { __dirname } from "./utils.js"
 const app = express()
 const PORT = 8080
 //const productManager = new ProductManager("/files/products.json")
-const MONGOOSE_URL = 'mongodb://127.0.0.1:27017/ecommerce'
+const MONGOOSE_URL = 'mongodb+srv://ivyaguilar07:bjLpjWzJQGdcrVRL@cluster0.2olteyc.mongodb.net/?retryWrites=true&w=majority'
 
 // const httpServer = app.listen(PORT, () => {
 //     console.log(`Servidor Express ejecutándose en puerto ${PORT}`)

@@ -5,9 +5,9 @@ class ProductManager {
     }
 
     //Creación de producto
-    addProduct = async (obj) => {
+    addProduct = async (newProduct) => {
         try {
-            return await productModel.create(product)
+            return await productModel.create(newProduct)
         } catch (err) {
             return console.error(err)
         }
@@ -33,11 +33,11 @@ class ProductManager {
     }
 
     //Obtener productos según su id
-    getProductbyId = async (id) => {
+    getProductbyId = async (pid) => {
         try {
-            const productById = await productModel.findById(id)
+            const productById = await productModel.findById(pid)
             if(!productById) {
-                return "Ese producto no existe"
+                return "El producto no existe"
             } else {
                 return productById
             }
