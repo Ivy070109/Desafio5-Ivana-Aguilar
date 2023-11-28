@@ -51,16 +51,19 @@ router.post("/", uploader.single('thumbnail'), async (req, res) => {
     res.status(200).send({ status: 'OK', data: result })
 })
 
-router.put("/:id", async (req, res) => {
-  const id = parseInt(req.params.id)
-  const updateProduct = req.body
+router.put("/:pid", async (req, res) => {
+  const { pid } = req.params
+  const objModif = req.body
+  const productUpdated = await product.updateProduct(pid, objModif)
 
-  return res.status(200).send(await product.updateProduct(id, updateProduct))
+  return res.status(200).send({ status: 'OK', data: productUpdated })
 })
 
-router.delete("/:id", async (req, res) => {
-  const id = req.params.id
-  return res.status(200).send(await product.deleteProduct(id))
+router.delete("/:pid", async (req, res) => {
+  const pid = req.params.pid
+  const productDelete = await product.deleteProductById(pid)
+
+  return res.status(200).send({ status: 'OK', data: productDelete })
 })
 
 export default router

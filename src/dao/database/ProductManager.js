@@ -66,9 +66,9 @@ class ProductManager {
     // }
 
     //Borrar producto según su id
-    deleteProductById = async (id) => {
+    deleteProductById = async (pid) => {
         try {
-            const productDetected = await productModel.findByIdAndDelete(id)
+            const productDetected = await productModel.findByIdAndDelete(pid)
             return productDetected
         } catch (err) {
             return console.error(err)
@@ -76,10 +76,9 @@ class ProductManager {
     }
 
     //Actualizar productos según su id
-    updateProduct = async (id, product) => {
+    updateProduct = async (pid, objModif) => {
         try {
-            const productDetected = await productModel.findByIdAndUpdate(id, product)
-            return productDetected
+            return productModel.findByIdAndUpdate(pid,  { $set: objModif })
         } catch (error) {
             return console.error(error)
         }
