@@ -1,7 +1,7 @@
 import express from "express"
 import mongoose from "mongoose"
 import productRouter from "./routes/product.router.js"
-import cartsRouter from "./routes/carts.router.js"
+import cartRouter from "./routes/carts.router.js"
 import handlebars from "express-handlebars"
 import viewsRouter from './routes/views.router.js'
 //import ProductManager from "./components/ProductManager.js"
@@ -42,7 +42,7 @@ app.set('views', `${__dirname}/views`)
 app.set('view engine', 'handlebars')
 
 app.use("/api/products", productRouter)
-app.use("/api/cart", cartsRouter)
+app.use("/api/carts", cartRouter)
 app.use('/', viewsRouter)
 
 //app.use(express.static('./src/public'))

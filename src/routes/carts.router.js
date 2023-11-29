@@ -2,26 +2,36 @@ import { Router } from "express"
 import CartManager from "../dao/database/CartManager.js"
 
 const carts = new CartManager()
-const cartsRouter = Router()
+const router = Router()
 
-cartsRouter.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     const newCart = await carts.addCarts()
 
-    return res.status(200).send({ status: 'OK'})
+    return res.status(200).send({ status: 'OK', data: newCart})
 })
 
-cartsRouter.get('/', async (req, res) => {
-    return res.status(200).send(await carts.readCarts())
+router.get('/', async (req, res) => {
+    const cart = await carts.getCarts()
+
+    return res.status(200).send({ status: 'OK', data: cart })
 })
 
-cartsRouter.get('/:id', async (req, res) => {
-    return res.status(200).send(await carts.getCartById(req.params.id))
+router.get('/:cid', async (req, res) => {
+    const { cid } = req.params
+    const foundCart = await carts.getCartById(cid)
+
+    return res.status(200).send({ status: 'OK', data: foundCart })
+
 })
 
-cartsRouter.post('/:cid/products/:pid', async (req, res) => {
+router.post('/:cid/products/:pid', async (req, res) => {
     const cartId = req.params.cid
     const productId = req.params.pid
-    res.status(200).send(await carts.addProductInCart(cartId, productId))
+    const { quantity } = req.body
+
+    const result = await carts.addProductInCart(cartId, { _id: productId, quantity: quantity })
+
+    return res.status(200).send({ message: `El producto ${productId} ha sido agregado al carrito`, cart: result})
 })
 
-export default cartsRouter
+export default router

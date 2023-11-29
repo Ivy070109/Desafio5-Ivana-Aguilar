@@ -3,12 +3,11 @@ import cartModel from '../models/carts.model.js'
 //lo importo para poder ver lo que los carritos incluyan
 
 //const products = new ProductManager()
-class CartManager{
+class CartManager {
     constructor() {
     }
 
-    //leer los carritos
-    readCarts = async () => {
+    getCarts = async () => {
         try {
             const carts = await cartModel.find().lean()
             return carts
@@ -17,25 +16,26 @@ class CartManager{
         }
     }
 
-    getCarts = async () => {
+    //obtener el carrito según su id
+    getCartById = async (cid) => {
         try {
-            return await this.readCarts()
+            const cartId = await cartModel.findById(cid)
+            return cartId 
         } catch (err) {
             return console.error(err)
         }
     }
-
-    //obtener el carrito según su id
-    getCartById = async (cid) => {
+    
+    //crear carrito
+    addCarts = async (products) => {
         try {
-            const cartById = await cartModel.findById(id)
-            if(!cartById) {
-                return "Ese carrito no existe"
-            } else {
-                return cartById
+            let cartProducts = {}
+            if (products && products.length > 0) {
+                cartProducts.products = products
             }
-        } catch (err) {
-            return console.error(err)
+            await cartModel.create(cartProducts)
+        } catch (error) {
+            return error('Carrito agregado')
         }
     }
     
@@ -80,18 +80,6 @@ class CartManager{
     //     }
     // }
 
-    //crear carrito
-    addCarts = async (products) => {
-        try {            
-            let cartProducts = {}
-            if (products && products.length > 0) {
-                cartProducts.products = products
-            } 
-            await cartModel.create(cartProducts)
-        } catch (err) {
-            return console.error(err)
-        }
-    }
 
     //agregar producto en carrito
     addProductInCart = async (cartId, productId) => {
@@ -110,7 +98,6 @@ class CartManager{
             return await cartModel.findById(cartId)
         } catch (err) {
             return console.error(`Error al agregar el producto al carrito`)
-            return err
         }
     }
 }

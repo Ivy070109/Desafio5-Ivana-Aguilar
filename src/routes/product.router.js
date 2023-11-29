@@ -18,7 +18,8 @@ router.get("/", async (req, res) => {
 })
 
 router.get("/:pid", async (req, res) => {
-  const productById = await product.getProductbyId(req.params.pid)
+  const pid = req.params
+  const productById = await product.getProductbyId(pid)
 
   return res.status(200).send({ status: 'OK', data: productById })
 })
