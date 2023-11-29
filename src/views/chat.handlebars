@@ -1,7 +1,14 @@
 <div id="chat-container">
-    <h4 id="nombreUsuario">Nombre de Usuario</h4>
-    <input type="text" name="mensaje" id="box" placeholder="Escribe tu consulta">
-    <div id="content"></div>
+    <h2 id="nombreUsuario">Username</h2>
+    <div id="chat-messages">
+        <div class="message sender" id="contenido">
+            <p id="chat"> </p>
+        </div>
+    </div>
+    <form id="formulario">
+        <input type="text" name="mensaje" id="mensaje" placeholder="Escribe tu consulta">
+        <input type="submit" value="Enviar" />
+    </form>
 </div>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
