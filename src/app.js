@@ -5,28 +5,29 @@ import cartRouter from "./routes/carts.router.js"
 import handlebars from "express-handlebars"
 import viewsRouter from './routes/views.router.js'
 //import ProductManager from "./components/ProductManager.js"
-//import { Server } from "socket.io"
+import { Server } from "socket.io"
 import { __dirname } from "./utils.js"
 
 const app = express()
 const PORT = 8080
 //const productManager = new ProductManager("/files/products.json")
-const MONGOOSE_URL = 'mongodb+srv://ivyaguilar07:bjLpjWzJQGdcrVRL@cluster0.2olteyc.mongodb.net/?retryWrites=true&w=majority'
+const MONGOOSE_URL = 'mongodb+srv://ivyaguilar07:bjLpjWzJQGdcrVRL@cluster0.2olteyc.mongodb.net/ecommerce'
 
-// const httpServer = app.listen(PORT, () => {
-//     console.log(`Servidor Express ejecutándose en puerto ${PORT}`)
-// })
+const httpServer = app.listen(PORT, () => {
+    console.log(`Servidor Express ejecutándose en puerto ${PORT}`)
+})
 
 try {
     await mongoose.connect(MONGOOSE_URL)
-    app.listen(PORT, () => {
-        console.log(`Servidor Express ejecutándose en puerto ${PORT}`)
-    })
+    // app.listen(PORT, () => {
+    //     console.log(`Servidor Express ejecutándose en puerto ${PORT}`)
+    // })
+    httpServer
 } catch (err) {
     console.log(`No se puede conectar con las bases de datos (${err.message})`)
 }
 
-//const socketServer = new Server(httpServer)
+const socketServer = new Server(httpServer)
 
 //middleware a nivel app, capta errores
 app.use((err, req, res, next) => {
