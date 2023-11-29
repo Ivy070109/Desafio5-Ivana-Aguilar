@@ -5,7 +5,7 @@ import ProductManager from './ProductManager.js'
 const products = new ProductManager()
 class CartManager{
     constructor() {
-        this.path = './files/carts.json'
+        this.path 
         //importo el json a una carpeta aparte, ya que presentaba errores cuando la mantenia en la misma carpeta y de paso es más limpia la organización
         this.cart = []
     }

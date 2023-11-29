@@ -1,0 +1,12 @@
+#chat-container {
+    width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    height: 600px;
+    background-color: #b956e4;
+  }
+  
+  #contenido {
+    width: 600px;
+    height: 500px;
+  }

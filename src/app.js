@@ -7,6 +7,8 @@ import viewsRouter from './routes/views.router.js'
 //import ProductManager from "./components/ProductManager.js"
 import { Server } from "socket.io"
 import { __dirname } from "./utils.js"
+//importo la nueva ubicación de los sockets products
+import socketProducts from './socket/socketProduct.js'
 
 const app = express()
 const PORT = 8080
@@ -38,6 +40,9 @@ app.use((err, req, res, next) => {
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+//app.use(express.static('./src/public'))
+app.use('/static', express.static(`${__dirname}/public`))
+
 app.engine('handlebars', handlebars.engine())
 app.set('views', `${__dirname}/views`)
 app.set('view engine', 'handlebars')
@@ -46,23 +51,7 @@ app.use("/api/products", productRouter)
 app.use("/api/carts", cartRouter)
 app.use('/', viewsRouter)
 
-//app.use(express.static('./src/public'))
-app.use('/static', express.static(`${__dirname}/public`))
+//pasaré las conecciones socket a una nueva carpeta 
+socketProducts(socketServer)
 
-// socketServer.on('connection', async (socket) => {
-//     console.log('Cliente conectado con id:', socket.id)
-//     const productsArray = await productManager.getProducts({})
-//     socketServer.emit('enviarproducts', productsArray)
 
-//     socket.on('addProduct', async (obj) => {
-//         await productManager.addProduct(obj)
-//         const updatedProducts = await productManager.getProducts({})
-//     socketServer.emit('productsupdated', updatedProducts)
-//     })
-
-//     socket.on('deleteProduct', async (id) => {
-//         await productManager.deleteProductById(id)
-//         const newProductList = await productManager.getProducts({})
-//     socketServer.emit('productsupdated', newProductList)
-//     })
-// })

@@ -1,7 +1,7 @@
 import fs from "fs"
 class ProductManager {
   constructor() {
-    this.path = './src/files/products.json'
+    this.path 
     //importo el json a una carpeta aparte, ya que presentaba errores cuando la mantenia en la misma carpeta y de paso es más limpia la organización
     this.products = []
   }
