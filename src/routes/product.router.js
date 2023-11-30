@@ -25,9 +25,6 @@ router.get("/:pid", async (req, res) => {
 })
 
 router.post("/", uploader.single('thumbnail'), async (req, res) => {
-  // const newProduct = req.body
-
-  // return res.status(200).send(await product.addProduct(newProduct))
     if (!req.file) return res.status(400).send({ status: 'FIL', data: 'No se pudo subir el archivo' })
 
     const { title, description, price, category, status, code, stock } = req.body
@@ -41,8 +38,6 @@ router.post("/", uploader.single('thumbnail'), async (req, res) => {
         price,
         category,
         status,
-        // el obj req.file está disponible porque estamos utilizando Multer como middleware,
-        // mediante el objeto uploader que estamos importando e inyectando.
         thumbnail: req.file.filename,
         code,
         stock

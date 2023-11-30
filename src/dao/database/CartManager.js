@@ -1,8 +1,5 @@
 import cartModel from '../models/carts.model.js'
-//import ProductManager from './ProductManager.js'
-//lo importo para poder ver lo que los carritos incluyan
 
-//const products = new ProductManager()
 class CartManager {
     constructor() {
     }
@@ -39,48 +36,6 @@ class CartManager {
         }
     }
     
-    // //buscar existencia según su id
-    // exist = async (cid) => {
-    //     try {
-    //         const carts = await this.readCarts()
-    //         const findCart = carts.find(cart => cart.id === cid)
-
-    //         return findCart
-    //     } catch (err) {
-    //         return console.error(err)
-    //     }
-    // }
-
-    // //escribir en el carrito
-    // writeCarts = async (carts) => {
-    //     try {
-    //         const write = await fs.promises.writeFile(this.path, JSON.stringify(carts, null, 2))
-
-    //         return write
-    //     } catch (err) {
-    //         return console.error(err)
-    //     }
-    // }
-    
-    // //Generar id autoincrementable
-    // generateCartId = async () => {
-    //     try {
-    //         if (fs.existsSync(this.path)) {
-    //         //busco la existencia de ésta ruta con éste método predeterminado
-    //             const cartList = await this.readCarts()
-    //             const counter = cartList.length
-    //             if (counter == 0) {
-    //                 return 1
-    //             } else {
-    //                 return cartList[counter - 1 ].id + 1
-    //             }
-    //         }
-    //     } catch (err) {
-    //         return console.error(err)
-    //     }
-    // }
-
-
     //agregar producto en carrito
     addProductInCart = async (cartId, productId) => {
         try {

@@ -46,25 +46,6 @@ class ProductManager {
         }
     }
   
-    //con bd no se necesita generar id
-    // //Generar id autoincrementable
-    // generateId = async () => {
-    //     try {
-    //         if (fs.existsSync(this.path)) {
-    //         //busco la existencia de ésta ruta con éste método predeterminado de node
-    //         const productList = await this.readProducts()
-    //         const counter = productList.length
-    //             if (counter == 0) {
-    //                 return 1
-    //             } else {
-    //                 return productList[counter - 1 ].id + 1
-    //             }
-    //             }
-    //     } catch (err) {
-    //         return console.error(err)
-    //     }
-    // }
-
     //Borrar producto según su id
     deleteProductById = async (pid) => {
         try {
