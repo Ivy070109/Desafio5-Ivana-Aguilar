@@ -15,8 +15,6 @@ const PORT = 8080
 
 const MONGOOSE_URL = 'mongodb+srv://ivyaguilar07:bjLpjWzJQGdcrVRL@cluster0.2olteyc.mongodb.net/ecommerce'
 
-
-
 try {
     await mongoose.connect(MONGOOSE_URL)
     const app = express()
